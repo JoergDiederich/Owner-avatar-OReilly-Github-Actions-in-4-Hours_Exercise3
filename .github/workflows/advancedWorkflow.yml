@@ -1,5 +1,8 @@
 name: first workflow
 
+env:
+  WORKFLOW: "This is a workflow lvl var"
+  
 on:
   workflow_dispatch:
 
@@ -21,13 +24,20 @@ jobs:
         run: |
           echo "The time of the greeting was at: ${{ steps.print-to-log.outputs.time }}"
   secondjob:
+    env:
+      JOB_VAR: "This is a job var"
     runs-on: ubuntu-latest
+    needs: firstjob
     steps:
       - name: secondJob script
         shell: bash
         run: |
           echo This is second job
           echo And this is a multi-line script
+      - name: environment variables
+        env:
+          STEP_VAR: "This is a step var"
+
   
       
 
