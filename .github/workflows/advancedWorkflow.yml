@@ -1,7 +1,7 @@
 name: first workflow
 
 env:
-  WORKFLOW: "This is a workflow lvl var"
+  WORKFLOW_VAR: "This is a workflow lvl var"
   
 on:
   workflow_dispatch:
@@ -37,6 +37,15 @@ jobs:
       - name: environment variables
         env:
           STEP_VAR: "This is a step var"
+        run: |
+          echo $WORKFLOW_VAR
+          echo $JOB_VAR
+          echo $STEP_VAR
+          echo "The following is a secret: ${{ secrets.SOME_SECRET }}, of course this won't be displayed in the job"
+          echo "The following are default (predefined) environment variables"          
+          echo $GITHUB_ACTOR
+          echo $GITHUB_JOB
+          echo $GITHUB_REF
 
   
       
