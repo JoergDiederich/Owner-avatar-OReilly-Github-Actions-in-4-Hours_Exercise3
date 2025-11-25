@@ -10,12 +10,15 @@ jobs:
       - name: firstJob script
         shell: bash
         run: echo Hello World! this is the first job
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
       - name: Print to Log
         id: print-to-log
         uses: actions/hello-world-javascript-action@main
         with:
           who-to-greet: ${{ github.actor }}
+      - name: time
+        run: |
+          echo "The time of the greeting was at: ${{ steps.print-to-log.outputs.time }}"
   secondjob:
     runs-on: ubuntu-latest
     steps:
